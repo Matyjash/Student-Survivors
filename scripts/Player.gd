@@ -1,6 +1,7 @@
 extends Area2D
 
 signal hit
+signal player_position_changed
 export var speed = 300
 var screen_size
 var count = 0
@@ -9,6 +10,10 @@ var background_tiles = null
 func _ready():
 	screen_size = get_viewport_rect().size
 	background_tiles = get_parent().get_node("TileMap")
+	
+func start():
+	show()
+	$CollisionShape2D.disabled = false
 	
 func set_cell(tilemap, x, y, id):
 	tilemap.set_cell(x, y, id, false, false, false, get_subtile_with_priority(id, tilemap))
@@ -62,12 +67,14 @@ func _process(delta):
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
+		emit_signal("player_position_changed")
 		$AnimatedSprite.play()
 	else:
 		$AnimatedSprite.stop()
 		$AnimatedSprite.set_frame(0)
 		
 	position += velocity * delta
+	
 	#blokowanie wyjścia poza ekran (poki co)
 	#position.x = clamp(position.x, 0, screen_size.x)
 	#position.y = clamp(position.y, 0, screen_size.y)
