@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="Student Survivors"
+run/main_scene="res://scenes/Background.tscn"
 config/icon="res://icon.png"
 
 [display]

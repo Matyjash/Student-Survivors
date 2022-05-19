@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/map/tiles.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Zombie1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Background.gd" type="Script" id=4]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tiles.png 0"
@@ -26,7 +28,14 @@
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0, 0, 0, 0, 1000, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0 )
+}
+
 [node name="Background" type="Node2D"]
+script = ExtResource( 4 )
+mob_scene = ExtResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -39,3 +48,20 @@ position = Vector2( 514, 298 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+
+[node name="MobSpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[connection signal="hit" from="Player" to="." method="_on_Player_hit"]
+[connection signal="player_position_changed" from="Player" to="." method="_on_Player_player_position_changed"]
+[connection signal="timeout" from="MobSpawnTimer" to="." method="_on_MobSpawnTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
