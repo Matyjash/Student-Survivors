@@ -8,6 +8,7 @@ func _ready():
 	pass
 
 
+
 func _on_Player_hit():
 	$MobSpawnTimer.stop()
 	
@@ -17,31 +18,49 @@ func new_game():
 
 #tworznie nowego moba co okreśolną ilość czasu
 func _on_MobSpawnTimer_timeout():
-	$MobPath.position.x = $Player.position.x - 300
-	$MobPath.position.y = $Player.position.y + 200
-	$MobPath/MobSpawnLocation.position = $MobPath.position
+	
 	
 	var mob = mob_scene.instance()
+	mob.position = generate_spawn_position()
 	
-	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
-	mob_spawn_location.offset = randi()
-	
-	var direction = mob_spawn_location.rotation + PI /2
-	
-	mob.position = mob_spawn_location.position
-	direction += rand_range(-PI /4 , PI/4)
-	mob.rotation = direction
-	
-	var velocity = Vector2(rand_range(150.0, 250.0), 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)
 
 
 func _on_StartTimer_timeout():
 	$MobSpawnTimer.start()
-	
 
-func _on_Player_player_position_changed():
-	print($MobPath.position)
+func generate_spawn_position():
+	
+	var rand_index = randi() % 4
+	#losujemy liczbe 1-4 każda odpowiada innej krawędzi ekranu
+	#górna część ekranu
+	if rand_index == 0:
+		var y = $Player.position.y - get_viewport().size.y/2 - 50
+		var x1 = $Player.position.x - get_viewport().size.x/2
+		var x2 = $Player.position.x + get_viewport().size.x/2
+		var x = randi() % int(x2) + x1
+		return Vector2(x,y)
+	#prawa częśc ekranu
+	elif rand_index == 1:
+		var x = $Player.position.x + get_viewport().size.x/2 + 50
+		var y1 = $Player.position.y - get_viewport().size.y/2
+		var y2 = $Player.position.y + get_viewport().size.y/2
+		var y = randi() % int(y2) + y1
+		return Vector2(x,y)
+	#dolna częśc ekranu
+	elif rand_index == 2:
+		var y = $Player.position.y + get_viewport().size.y/2 + 50
+		var x1 = $Player.position.x - get_viewport().size.x/2
+		var x2 = $Player.position.x + get_viewport().size.x/2
+		var x = randi() % int(x2) + x1
+		return Vector2(x,y)
+	#lewa część ekranu
+	elif rand_index == 3:
+		var x = $Player.position.x - get_viewport().size.x/2 - 50
+		var y1 = $Player.position.y - get_viewport().size.y/2
+		var y2 = $Player.position.y + get_viewport().size.y/2
+		var y = randi() % int(y2) + y1
+		return Vector2(x,y)
+		
 	
