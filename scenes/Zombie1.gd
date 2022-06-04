@@ -18,8 +18,7 @@ func _physics_process(delta):
 	
 	move = position.direction_to(player.position) * speed
 	move = move.normalized()
-	
-		
+  
 	move = move_and_collide(move)
 	
 func handle_hit(damage):
@@ -27,7 +26,6 @@ func handle_hit(damage):
 	$AnimationPlayer.play("hit")
 	if health <= 0:
 		queue_free()
-
 
 #usuwanie moba po wyjściu z ekranu
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
