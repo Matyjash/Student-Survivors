@@ -101,7 +101,7 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 30, -24 ), Vector2( 35, -17 ), Vector2( 44, -15 ), Vector2( 45, -13 ), Vector2( 46, -2 ), Vector2( 47, 8 ), Vector2( 40, 8 ), Vector2( 47, 8 ), Vector2( 46, -2 ), Vector2( 45, -13 ), Vector2( 44, -15 ), Vector2( 35, -17 ), Vector2( 30, -24 ) ]
-}
+
 tracks/2/type = "value"
 tracks/2/path = NodePath("CollisionShape2D:disabled")
 tracks/2/interp = 1
