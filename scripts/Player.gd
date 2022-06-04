@@ -7,6 +7,8 @@ var screen_size
 var count = 0
 var background_tiles = null
 
+onready var weapon = $Weapon
+
 func _ready():
 	screen_size = get_viewport_rect().size
 	background_tiles = get_parent().get_node("TileMap")
@@ -14,6 +16,7 @@ func _ready():
 func start():
 	show()
 	$CollisionShape2D.disabled = false
+	
 	
 func set_cell(tilemap, x, y, id):
 	tilemap.set_cell(x, y, id, false, false, false, get_subtile_with_priority(id, tilemap))
@@ -58,13 +61,16 @@ func _process(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
+		scale.x = 1
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
+		scale.x = -1
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-
+	
+	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		emit_signal("player_position_changed")
@@ -97,3 +103,7 @@ func _on_Player_body_entered(body):
 	$AnimatedSprite.flip_v = true 
 	emit_signal("hit")
 	$CollisionShape2D.set_deferred("disabled", true)
+
+#wyprowadzanie ataku po upłynięciu czasu
+func _on_AttackTimer_timeout():
+	weapon.attack()

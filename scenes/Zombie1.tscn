@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/zombie1/zombie2_2.png" type="Texture" id=1]
 [ext_resource path="res://assets/zombie1/zombie2_1.png" type="Texture" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://assets/zombie1/zombie2_3.png" type="Texture" id=8]
 [ext_resource path="res://assets/zombie1/zombie3_1.png" type="Texture" id=9]
 [ext_resource path="res://scenes/Zombie1.gd" type="Script" id=10]
+[ext_resource path="res://assets/zombie1/zombie_hit2.png" type="Texture" id=11]
+[ext_resource path="res://assets/zombie1/zombie_hit3.png" type="Texture" id=12]
+[ext_resource path="res://assets/zombie1/zombie_hit4.png" type="Texture" id=13]
+[ext_resource path="res://assets/zombie1/zombie_hit1.png" type="Texture" id=14]
+[ext_resource path="res://assets/zombie1/hit.tres" type="Animation" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,14 +23,19 @@ animations = [ {
 "name": "variant1",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "variant3",
-"speed": 5.0
+"frames": [ ExtResource( 14 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": false,
+"name": "hit",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "variant2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "variant3",
 "speed": 5.0
 } ]
 
@@ -33,7 +43,61 @@ animations = [ {
 radius = 21.0
 height = 22.0
 
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "hit" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "hit" ]
+}
+
 [node name="Zombie1" type="KinematicBody2D"]
+self_modulate = Color( 0.768627, 0.768627, 0.768627, 1 )
+
 collision_mask = 0
 script = ExtResource( 10 )
 __meta__ = {
@@ -42,8 +106,8 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "variant3"
-frame = 2
+animation = "hit"
+
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -51,4 +115,12 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite")
+anims/RESET = SubResource( 3 )
+anims/hit = ExtResource( 15 )
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
