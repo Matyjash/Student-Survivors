@@ -3,6 +3,7 @@ var player = null
 var speed = 1
 onready var animatedSprite = $AnimatedSprite
 export var health = 20
+export var damage = 10
 var oldAnimation = null
 
 func _ready():

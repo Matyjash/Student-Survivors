@@ -2,10 +2,13 @@ extends Area2D
 
 signal hit
 signal player_position_changed
+signal die
 export var speed = 300
 var screen_size
 var count = 0
 var background_tiles = null
+export var max_healt_points = 100
+var healt_points = max_healt_points
 
 onready var weapon = $Weapon
 
@@ -99,10 +102,22 @@ func render_background():
 		var has_tile = tile > -1
 		if (!has_tile): set_cell(background_tiles, i.x, i.y, 0)
 
-func _on_Player_body_entered(body):
+func _die():
 	$AnimatedSprite.flip_v = true 
-	emit_signal("hit")
 	$CollisionShape2D.set_deferred("disabled", true)
+	emit_signal("die")
+
+func _get_damage(damage):
+	healt_points -= damage
+	if healt_points <= 0:
+		healt_points = 0
+		_die()
+	
+
+func _on_Player_body_entered(body):
+	_get_damage(body.damage)
+	emit_signal("hit")
+	
 
 #wyprowadzanie ataku po upłynięciu czasu
 func _on_AttackTimer_timeout():

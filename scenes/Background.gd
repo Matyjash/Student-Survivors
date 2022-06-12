@@ -5,12 +5,15 @@ export(PackedScene) var mob_scene
 func _ready():
 	randomize()
 	new_game()
+	$Player/Camera2D/Interface/Bars/LifeBar.set_maximum_value($Player.max_healt_points)
+	$Player/Camera2D/Interface/Bars/LifeBar.set_current_value($Player.healt_points)
 	pass
 
 
 
 func _on_Player_hit():
-	$MobSpawnTimer.stop()
+	$Player/Camera2D/Interface/Bars/LifeBar.set_current_value($Player.healt_points)
+
 	
 func new_game():
 	$Player.start()
@@ -64,3 +67,7 @@ func generate_spawn_position():
 		return Vector2(x,y)
 		
 	
+
+
+func _on_Player_die():
+	$MobSpawnTimer.stop()
