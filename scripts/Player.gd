@@ -65,9 +65,11 @@ func _process(delta):
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 		scale.x = 1
+		$RemoteTransform2D.scale. x = 1
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
 		scale.x = -1
+		$RemoteTransform2D.scale. x = -1
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
@@ -87,10 +89,11 @@ func _process(delta):
 	#blokowanie wyjścia poza ekran (poki co)
 	#position.x = clamp(position.x, 0, screen_size.x)
 	#position.y = clamp(position.y, 0, screen_size.y)
-	
+	get_node("Camera2D").scale.x=1
 	count += 1
 	if (count % 15 == 0):
 		render_background()
+		
 	pass
 
 func render_background():
