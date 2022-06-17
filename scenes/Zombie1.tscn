@@ -18,31 +18,30 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "variant1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": false,
 "name": "hit",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "variant2",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "variant3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "variant1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "variant2",
 "speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 21.0
 height = 22.0
-
 
 [sub_resource type="Animation" id=3]
 length = 0.001
