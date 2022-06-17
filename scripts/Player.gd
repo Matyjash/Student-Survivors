@@ -10,7 +10,8 @@ var background_tiles = null
 export var max_healt_points = 100
 var healt_points = max_healt_points
 
-onready var weapon = $Weapon
+onready var sword = $Sword
+onready var aura = $Aura
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -19,6 +20,8 @@ func _ready():
 func start():
 	show()
 	$CollisionShape2D.disabled = false
+	#aura odblokowana na poczatek dla testow
+	$Aura.unlock()
 	
 	
 func set_cell(tilemap, x, y, id):
@@ -124,4 +127,5 @@ func _on_Player_body_entered(body):
 
 #wyprowadzanie ataku po upłynięciu czasu
 func _on_AttackTimer_timeout():
-	weapon.attack()
+	sword.attack()
+	aura.attack()
