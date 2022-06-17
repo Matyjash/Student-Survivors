@@ -12,6 +12,7 @@ var healt_points = max_healt_points
 
 onready var sword = $Sword
 onready var aura = $Aura
+onready var whip = $Whip
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -20,8 +21,9 @@ func _ready():
 func start():
 	show()
 	$CollisionShape2D.disabled = false
-	#aura odblokowana na poczatek dla testow
-	$Aura.unlock()
+	#aura i whip odblokowane na poczatek dla testow
+	aura.unlock()
+	whip.unlock()
 	
 	
 func set_cell(tilemap, x, y, id):
@@ -64,7 +66,7 @@ func generate_tile_boundary(pos):
 	return boundaries
 #poruszanie się gracza
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 		scale.x = 1
@@ -129,3 +131,4 @@ func _on_Player_body_entered(body):
 func _on_AttackTimer_timeout():
 	sword.attack()
 	aura.attack()
+	whip.attack()
