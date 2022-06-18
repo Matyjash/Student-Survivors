@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/map/tiles.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Zombie1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Background.gd" type="Script" id=4]
 [ext_resource path="res://interface/Interface.tscn" type="PackedScene" id=5]
 
@@ -36,7 +35,6 @@ _data = {
 
 [node name="Background" type="Node2D"]
 script = ExtResource( 4 )
-mob_scene = ExtResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -73,8 +71,12 @@ rect_pivot_offset = Vector2( -90, 89 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../Camera2D")
 
+[node name="PickupSpawnTimer" type="Timer" parent="."]
+wait_time = 4.0
+
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_MobSpawnTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="die" from="Player" to="." method="_on_Player_die"]
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 [connection signal="player_position_changed" from="Player" to="." method="_on_Player_player_position_changed"]
+[connection signal="timeout" from="PickupSpawnTimer" to="." method="_on_PickupSpawnTimer_timeout"]

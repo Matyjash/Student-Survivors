@@ -121,8 +121,18 @@ func _get_damage(damage):
 		healt_points = 0
 		_die()
 	
+func heal(amount):
+	print("heal")
+	emit_signal("health_picked")
+	if healt_points <= 90:
+		healt_points += amount
+		if healt_points > 100:
+			healt_points = 100
+	get_parent().refresh_Healthbar()
+		
 
 func _on_Player_body_entered(body):
+	print("hit")
 	_get_damage(body.damage)
 	emit_signal("hit")
 	
@@ -132,3 +142,5 @@ func _on_AttackTimer_timeout():
 	sword.attack()
 	aura.attack()
 	whip.attack()
+
+
