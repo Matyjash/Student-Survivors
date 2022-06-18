@@ -1,6 +1,8 @@
 extends Node2D
 
-export(PackedScene) var mob_scene
+var rng = RandomNumberGenerator.new()
+var mob_scene = preload("res://scenes/Zombie1.tscn")
+var health_scene = preload("res://scenes/Health.tscn")
 
 func _ready():
 	randomize()
@@ -12,6 +14,10 @@ func _ready():
 
 
 func _on_Player_hit():
+	refresh_Healthbar()
+
+func refresh_Healthbar():
+	print("refreshed healthbar")
 	$Player/Camera2D/Interface/Bars/LifeBar.set_current_value($Player.healt_points)
 
 	
@@ -21,17 +27,28 @@ func new_game():
 
 #tworznie nowego moba co okreśolną ilość czasu
 func _on_MobSpawnTimer_timeout():
-	
-	
 	var mob = mob_scene.instance()
 	mob.position = generate_spawn_position()
-	
-	
 	add_child(mob)
 
+#generowanie pickupa co określoną ilość czasu
+func _on_PickupSpawnTimer_timeout():
+	var pickup
+	var pickup_number = rng.randi_range(0,2)
+	if pickup_number == 0:
+		pickup = health_scene.instance()
+	elif pickup_number == 1:
+		pickup = health_scene.instance() #do zmiany na inny pickup
+	elif pickup_number == 2:
+		pickup = health_scene.instance() #do zmiany na inny pickup
+	
+	pickup.position = generate_spawn_position()
+	add_child(pickup)
+		
 
 func _on_StartTimer_timeout():
 	$MobSpawnTimer.start()
+	$PickupSpawnTimer.start()
 
 func generate_spawn_position():
 	
@@ -71,3 +88,6 @@ func generate_spawn_position():
 
 func _on_Player_die():
 	$MobSpawnTimer.stop()
+
+
+
