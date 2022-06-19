@@ -26,6 +26,7 @@ func handle_hit(damage):
 	health -= damage
 	$AnimationPlayer.play("hit")
 	if health <= 0:
+		get_parent().spawn_exp(position)
 		queue_free()
 
 #usuwanie moba po wyjściu z ekranu
