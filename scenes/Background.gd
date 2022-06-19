@@ -3,6 +3,7 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 var mob_scene = preload("res://scenes/Zombie1.tscn")
 var health_scene = preload("res://scenes/Health.tscn")
+var exp_scene = preload("res://scenes/Exp.tscn")
 
 func _ready():
 	randomize()
@@ -12,7 +13,11 @@ func _ready():
 	pass
 
 
-
+func spawn_exp(position):
+	var exp_point = exp_scene.instance()
+	exp_point.position = position
+	add_child(exp_point)
+	
 func _on_Player_hit():
 	refresh_Healthbar()
 
@@ -20,6 +25,10 @@ func refresh_Healthbar():
 	print("refreshed healthbar")
 	$Player/Camera2D/Interface/Bars/LifeBar.set_current_value($Player.healt_points)
 
+func refresh_ExperienceBar():
+	$Player/Camera2D/Interface/Bars/ExperienceBar.set_current_value($Player.exp_points)
+	$Player/Camera2D/Interface/Bars/ExperienceBar.set_maximum_value($Player.next_level_exp)
+	
 	
 func new_game():
 	$Player.start()

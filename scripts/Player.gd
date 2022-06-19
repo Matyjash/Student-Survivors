@@ -9,6 +9,9 @@ var count = 0
 var background_tiles = null
 export var max_healt_points = 100
 var healt_points = max_healt_points
+var exp_points = 0
+var next_level_exp = 12
+var lvl = 1
 
 onready var sword = $Sword
 onready var aura = $Aura
@@ -21,6 +24,7 @@ func _ready():
 func start():
 	show()
 	$CollisionShape2D.disabled = false
+	get_parent().refresh_ExperienceBar()
 	#aura i whip odblokowane na poczatek dla testow
 	aura.unlock()
 	whip.unlock()
@@ -121,6 +125,19 @@ func _get_damage(damage):
 		healt_points = 0
 		_die()
 	
+func add_exp(amount):
+	exp_points += amount
+	if exp_points < next_level_exp:
+		get_parent().refresh_ExperienceBar()
+	else:
+		var surplus = exp_points - next_level_exp
+		exp_points = surplus
+		print("lvl up")
+		lvl += 1
+		next_level_exp = int(next_level_exp * 1.2)
+		get_parent().refresh_ExperienceBar()
+		
+
 func heal(amount):
 	print("heal")
 	emit_signal("health_picked")
