@@ -3,7 +3,7 @@ extends Area2D
 signal hit
 signal player_position_changed
 signal die
-export var speed = 300
+export var speed = 200
 var screen_size
 var count = 0
 var background_tiles = null
@@ -133,9 +133,11 @@ func add_exp(amount):
 		var surplus = exp_points - next_level_exp
 		exp_points = surplus
 		print("lvl up")
+		$LevelAudio.play()
 		lvl += 1
 		next_level_exp = int(next_level_exp * 1.2)
 		get_parent().refresh_ExperienceBar()
+		add_exp(0)
 		
 
 func heal(amount):
@@ -156,8 +158,11 @@ func _on_Player_body_entered(body):
 
 #wyprowadzanie ataku po upłynięciu czasu
 func _on_AttackTimer_timeout():
-	sword.attack()
-	aura.attack()
-	whip.attack()
+	if $Sword.unlocked : 
+		sword.attack()
+	if $Aura.unlocked :
+		aura.attack()
+	if $Whip.unlocked:
+		whip.attack()
 
 

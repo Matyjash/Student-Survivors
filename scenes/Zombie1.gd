@@ -27,7 +27,9 @@ func _physics_process(delta):
 func handle_hit(damage):
 	health -= damage
 	$AnimationPlayer.play("hit")
+	$Cut.play()
 	if health <= 0:
+		visible = false
 		get_parent().spawn_exp(position, exp_to_drop)
 		queue_free()
 

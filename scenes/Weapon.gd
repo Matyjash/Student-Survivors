@@ -1,10 +1,12 @@
 extends Area2D
 
 export var damage = 10
+export var unlocked = true
 onready var anim = $AnimationPlayer
 
 func attack():
 	anim.play("swing")
+	$SwordAudio.play()
 	
 
 

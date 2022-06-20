@@ -9,6 +9,8 @@ func attack():
 		anim.play("Pulse")
 
 func unlock():
+	$Sprite.scale.x = 2.35
+	$Sprite.scale.y = 2.542
 	unlocked = true
 	$Sprite.visible = true
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mixkit-quick-saber-cut-2158.mp3-07266298196fe15036f2bce658c339ab.mp3str"
+
+[deps]
+
+source_file="res://assets/zombie1/mixkit-quick-saber-cut-2158.mp3"
+dest_files=[ "res://.import/mixkit-quick-saber-cut-2158.mp3-07266298196fe15036f2bce658c339ab.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

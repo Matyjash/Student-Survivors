@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/clean-fast-swooshaiff-14784.mp3-4c52ff0ed3c3c9da7623684bba791df0.mp3str"
+
+[deps]
+
+source_file="res://assets/weapons/whip/clean-fast-swooshaiff-14784.mp3"
+dest_files=[ "res://.import/clean-fast-swooshaiff-14784.mp3-4c52ff0ed3c3c9da7623684bba791df0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
