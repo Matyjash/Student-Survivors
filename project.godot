@@ -11,13 +11,18 @@ config_version=4
 [application]
 
 config/name="Student Survivors"
-run/main_scene="res://scenes/Background.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[global]
+
+"top scene"=false
+top=false
 
 [input]
 

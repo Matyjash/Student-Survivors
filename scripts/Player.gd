@@ -117,6 +117,7 @@ func render_background():
 func _die():
 	$AnimatedSprite.flip_v = true 
 	$CollisionShape2D.set_deferred("disabled", true)
+	get_tree().change_scene("res://scenes/GameOver.tscn")
 	emit_signal("die")
 
 func _get_damage(damage):
