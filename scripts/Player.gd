@@ -1,8 +1,10 @@
 extends Area2D
 
+signal level_up
 signal hit
 signal player_position_changed
 signal die
+
 export var speed = 200
 var screen_size
 var count = 0
@@ -139,6 +141,8 @@ func add_exp(amount):
 		next_level_exp = int(next_level_exp * 1.2)
 		get_parent().refresh_ExperienceBar()
 		add_exp(0)
+		emit_signal("level_up")
+		get_tree().paused = true
 		
 
 func heal(amount):

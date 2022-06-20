@@ -57,10 +57,10 @@ curve = SubResource( 2 )
 current = true
 
 [node name="Interface" parent="Player/Camera2D" instance=ExtResource( 5 )]
-margin_left = -490.0
-margin_top = -298.0
-margin_right = -490.0
-margin_bottom = -147.0
+margin_left = -458.0
+margin_top = -306.0
+margin_right = 1010.0
+margin_bottom = 534.0
 rect_scale = Vector2( 0.65, 0.65 )
 rect_pivot_offset = Vector2( -90, 89 )
 
@@ -91,7 +91,10 @@ script = ExtResource( 3 )
 
 [connection signal="die" from="Player" to="." method="_on_Player_die"]
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
-[connection signal="player_position_changed" from="Player" to="." method="_on_Player_player_position_changed"]
+[connection signal="level_up" from="Player" to="Player/Camera2D/Interface" method="_on_Player_level_up"]
+[connection signal="auraUp" from="Player/Camera2D/Interface" to="." method="_on_Interface_auraUp"]
+[connection signal="swordUp" from="Player/Camera2D/Interface" to="." method="_on_Interface_swordUp"]
+[connection signal="whipUp" from="Player/Camera2D/Interface" to="." method="_on_Interface_whipUp"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="PickupSpawnTimer" to="." method="_on_PickupSpawnTimer_timeout"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_MobSpawnTimer_timeout"]

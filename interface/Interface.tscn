@@ -1,11 +1,49 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://interface/bar/life_bar/LifeBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://interface/bar/experience_bar/ExperienceBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Interface.gd" type="Script" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+
+# Declare member variables here. Examples:
+signal swordUp
+signal auraUp
+signal whipUp
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_SwordUpButton_pressed():
+	emit_signal(\"swordUp\")
+	get_tree().paused = false
+
+
+func _on_AuraUpButton_pressed():
+	emit_signal(\"auraUp\")
+	get_tree().paused = false
+
+
+func _on_WhipUpButton_pressed():
+	emit_signal(\"whipUp\")
+	get_tree().paused = false
+"
 
 [node name="Interface" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
-margin_bottom = 151.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
 
 [node name="Bars" type="VBoxContainer" parent="."]
 margin_left = 30.0
@@ -21,3 +59,41 @@ margin_right = 550.0
 margin_top = 57.0
 margin_right = 550.0
 margin_bottom = 97.0
+
+[node name="LevelupButtons" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+
+[node name="SwordUpButton" type="Button" parent="LevelupButtons"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -50.0
+margin_right = 200.0
+margin_bottom = 50.0
+text = "Ulepsz miecz"
+
+[node name="AuraUpButton" type="Button" parent="LevelupButtons"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -50.0
+margin_right = 100.0
+margin_bottom = 50.0
+text = "Ulepsz aure"
+
+[node name="WhipUpButton" type="Button" parent="LevelupButtons"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -50.0
+margin_bottom = 50.0
+text = "Ulepsz bicz"
+
+[connection signal="pressed" from="LevelupButtons/SwordUpButton" to="." method="_on_SwordUpButton_pressed"]
+[connection signal="pressed" from="LevelupButtons/AuraUpButton" to="." method="_on_AuraUpButton_pressed"]
+[connection signal="pressed" from="LevelupButtons/WhipUpButton" to="." method="_on_WhipUpButton_pressed"]

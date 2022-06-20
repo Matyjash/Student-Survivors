@@ -111,3 +111,20 @@ func _on_Player_die():
 
 
 
+
+
+func _on_Interface_whipUp():
+	var old_damage = $Player.whip.damage
+	$Player.whip.damage += 5 
+	print("whip damage up from ", old_damage, " to ", $Player.whip.damage)
+
+func _on_Interface_swordUp():
+	var old_damage = $Player.sword.damage
+	$Player.sword.damage += 5 
+	print("sword damage up from ", old_damage, " to ", $Player.sword.damage)
+
+
+func _on_Interface_auraUp():
+	var old_damage = $Player.aura.damage
+	$Player.aura.damage += 5 
+	print("aura damage up from ", old_damage, " to ", $Player.aura.damage)

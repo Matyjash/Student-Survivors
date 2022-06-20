@@ -26,3 +26,4 @@ func set_maximum_value(value):
 
 func update_count_text():
 	$Count/Number.text = str(current_value) + '/' + str(maximum_value)
+
