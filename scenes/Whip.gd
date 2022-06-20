@@ -1,11 +1,12 @@
 extends Area2D
 
-export var damage = 3
+export var damage = 50
 export var unlocked = true
 onready var anim = $AnimationPlayer
 
 func attack():
 	if unlocked:
+		$WhipAudio.play()
 		anim.play("whip")
 
 func unlock():
