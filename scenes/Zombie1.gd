@@ -4,6 +4,8 @@ var speed = 1
 onready var animatedSprite = $AnimatedSprite
 export var health = 20
 export var damage = 10
+var type = "mob"
+var exp_to_drop = 5
 var oldAnimation = null
 
 func _ready():
@@ -26,12 +28,13 @@ func handle_hit(damage):
 	health -= damage
 	$AnimationPlayer.play("hit")
 	if health <= 0:
-		get_parent().spawn_exp(position)
+		get_parent().spawn_exp(position, exp_to_drop)
 		queue_free()
 
 #usuwanie moba po wyjściu z ekranu
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	queue_free()
+	if type != "boss":
+		queue_free()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

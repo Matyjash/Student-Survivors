@@ -13,10 +13,27 @@ func _ready():
 	pass
 
 
-func spawn_exp(position):
+func spawn_exp(position, amount):
 	var exp_point = exp_scene.instance()
 	exp_point.position = position
+	exp_point.exp_amount = amount
 	add_child(exp_point)
+	
+func update_timer(time):
+	var minutes = int(time/60)
+	var sec = time - minutes * 60
+	
+	if minutes < 10:
+		if sec < 10:
+			$Player/Camera2D/TimeCounter.text = "0"+str(minutes)+":0"+str(sec)
+		else:
+			$Player/Camera2D/TimeCounter.text = "0"+str(minutes)+":"+str(sec)
+	else:
+		if sec < 10:
+			$Player/Camera2D/TimeCounter.text = str(minutes)+":0"+str(sec)
+		else:
+			$Player/Camera2D/TimeCounter.text = str(minutes)+":"+str(sec)
+	 
 	
 func _on_Player_hit():
 	refresh_Healthbar()
@@ -33,12 +50,6 @@ func refresh_ExperienceBar():
 func new_game():
 	$Player.start()
 	$StartTimer.start()
-
-#tworznie nowego moba co okreśolną ilość czasu
-func _on_MobSpawnTimer_timeout():
-	var mob = mob_scene.instance()
-	mob.position = generate_spawn_position()
-	add_child(mob)
 
 #generowanie pickupa co określoną ilość czasu
 func _on_PickupSpawnTimer_timeout():
