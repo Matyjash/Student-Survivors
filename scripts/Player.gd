@@ -169,5 +169,9 @@ func _on_AttackTimer_timeout():
 		aura.attack()
 	if $Whip.unlocked:
 		whip.attack()
-
-
+		
+func damage_up(damage_bonus):
+	$Sword.damage += damage_bonus
+	$Aura.damage += damage_bonus
+	$Whip.damage += damage_bonus
+	

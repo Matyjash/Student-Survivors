@@ -3,6 +3,7 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 var mob_scene = preload("res://scenes/Zombie1.tscn")
 var health_scene = preload("res://scenes/Health.tscn")
+var damage_up_scene = preload("res://scenes/DamageUp.tscn")
 var exp_scene = preload("res://scenes/Exp.tscn")
 
 func _ready():
@@ -13,10 +14,12 @@ func _ready():
 	pass
 
 
-func spawn_exp(position, amount):
+func spawn_exp(position, amount, color):
 	var exp_point = exp_scene.instance()
 	exp_point.position = position
 	exp_point.exp_amount = amount
+	if color == "red":
+		exp_point.set_red_color()
 	add_child(exp_point)
 	
 func update_timer(time):
@@ -39,7 +42,6 @@ func _on_Player_hit():
 	refresh_Healthbar()
 
 func refresh_Healthbar():
-	print("refreshed healthbar")
 	$Player/Camera2D/Interface/Bars/LifeBar.set_current_value($Player.healt_points)
 
 func refresh_ExperienceBar():
@@ -58,7 +60,7 @@ func _on_PickupSpawnTimer_timeout():
 	if pickup_number == 0:
 		pickup = health_scene.instance()
 	elif pickup_number == 1:
-		pickup = health_scene.instance() #do zmiany na inny pickup
+		pickup = damage_up_scene.instance()
 	elif pickup_number == 2:
 		pickup = health_scene.instance() #do zmiany na inny pickup
 	
