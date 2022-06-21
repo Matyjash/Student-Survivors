@@ -5,6 +5,7 @@ var mob_scene = preload("res://scenes/Zombie1.tscn")
 var health_scene = preload("res://scenes/Health.tscn")
 var damage_up_scene = preload("res://scenes/DamageUp.tscn")
 var exp_scene = preload("res://scenes/Exp.tscn")
+var speed_up_scene = preload("res://scenes/SpeedUp.tscn")
 
 func _ready():
 	randomize()
@@ -62,7 +63,7 @@ func _on_PickupSpawnTimer_timeout():
 	elif pickup_number == 1:
 		pickup = damage_up_scene.instance()
 	elif pickup_number == 2:
-		pickup = health_scene.instance() #do zmiany na inny pickup
+		pickup = speed_up_scene.instance()
 	
 	pickup.position = generate_spawn_position()
 	add_child(pickup)
