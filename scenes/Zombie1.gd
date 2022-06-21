@@ -12,25 +12,44 @@ func _ready():
 	randomize()
 	$AnimatedSprite.playing = true
 	var mob_types = $AnimatedSprite.frames.get_animation_names()
-	$AnimatedSprite.animation = mob_types[randi() % (mob_types.size()-1) +1]
+	mob_types.remove("boss")
+	mob_types.remove("boss_hit")
+	mob_types.remove("hit")
+	$AnimatedSprite.animation = mob_types[randi() % (mob_types.size())]
 	oldAnimation = $AnimatedSprite.animation
 	player = get_tree().get_nodes_in_group("player")[0]
+	if type == "boss":
+		$AnimatedSprite.animation = "boss"
+		oldAnimation = $AnimatedSprite.animation
+
 
 func _physics_process(delta):
-	var move = Vector2.ZERO
+	var move1 = Vector2.ZERO
 	
-	move = position.direction_to(player.position) * speed
-	move = move.normalized()
+	move1 = position.direction_to(player.position) * speed
+	move1 = move1.normalized()
+	
+	if move1.x < 0:
+		$AnimatedSprite.flip_h = true
+	else:
+		$AnimatedSprite.flip_h = false
+		
   
-	move = move_and_collide(move)
+	move1 = move_and_collide(move1)
 	
 func handle_hit(damage):
 	health -= damage
-	$AnimationPlayer.play("hit")
+	if type == "boss":
+		$AnimationPlayer.play("hit_boss")
+	else:
+		$AnimationPlayer.play("hit")
 	$Cut.play()
 	if health <= 0:
 		visible = false
-		get_parent().spawn_exp(position, exp_to_drop)
+		if type == "boss":
+			get_parent().spawn_exp(position, exp_to_drop, "red")
+		else:
+			get_parent().spawn_exp(position, exp_to_drop, "blue")
 		queue_free()
 
 #usuwanie moba po wyjściu z ekranu

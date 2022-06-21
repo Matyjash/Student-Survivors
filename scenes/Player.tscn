@@ -1,8 +1,8 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=62 format=2]
 
-[ext_resource path="res://assets/player/player_walk.png" type="Texture" id=1]
-[ext_resource path="res://assets/player/player.png" type="Texture" id=2]
-[ext_resource path="res://assets/player/player_walk2.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/hero/slice_1_5.png" type="Texture" id=1]
+[ext_resource path="res://assets/player/hero/slice_1_7.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/hero/slice_1_9.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=4]
 [ext_resource path="res://assets/weapons/sword1/sword1.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Weapon.gd" type="Script" id=6]
@@ -46,13 +46,16 @@
 [ext_resource path="res://assets/weapons/sword1/sword1_sound.wav" type="AudioStream" id=44]
 [ext_resource path="res://assets/weapons/whip/clean-fast-swooshaiff-14784.mp3" type="AudioStream" id=45]
 [ext_resource path="res://assets/player/lvl_up.wav" type="AudioStream" id=46]
+[ext_resource path="res://assets/player/hero/slice_1_0.png" type="Texture" id=47]
+[ext_resource path="res://assets/player/hero/slice_1_3.png" type="Texture" id=48]
+[ext_resource path="res://assets/player/hero/slice_1_1.png" type="Texture" id=49]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 47 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
-"speed": 5.0
+"speed": 10.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -284,8 +287,9 @@ position = Vector2( 2, -1 )
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-playing = true
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -326,7 +330,7 @@ position = Vector2( -5, -5 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 12 )
 animation = "aura"
-frame = 16
+frame = 15
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Aura"]

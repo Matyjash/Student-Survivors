@@ -12,4 +12,5 @@ func attack():
 
 func _on_Weapon_body_entered(body):
 	if body.has_method("handle_hit"):
+		print(str(damage)+ " dealt")
 		body.handle_hit(damage)
