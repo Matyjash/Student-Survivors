@@ -177,7 +177,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.4, 0.4 ), Vector2( 0.5, 0.5 ) ]
+"values": [ Vector2( 2.405, 2.055 ), Vector2( 2.7, 2.3 ), Vector2( 2.405, 2.055 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("CollisionShape2D:disabled")
@@ -322,11 +322,11 @@ scale = Vector2( 5.5, 5.5 )
 shape = SubResource( 6 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Aura"]
-position = Vector2( -6, -3 )
+position = Vector2( -5, -5 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 12 )
 animation = "aura"
-frame = 11
+frame = 16
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Aura"]

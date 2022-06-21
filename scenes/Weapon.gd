@@ -1,6 +1,6 @@
 extends Area2D
 
-export var damage = 10
+export var damage = 7
 export var unlocked = true
 onready var anim = $AnimationPlayer
 
