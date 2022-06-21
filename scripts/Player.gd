@@ -153,6 +153,9 @@ func heal(amount):
 		if healt_points > 100:
 			healt_points = 100
 	get_parent().refresh_Healthbar()
+	
+func speed_up(amount):
+	speed +=amount
 		
 
 func _on_Player_body_entered(body):
