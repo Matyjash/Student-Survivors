@@ -1,6 +1,6 @@
 extends Area2D
 
-export var damage = 5
+export var damage = 10
 export var unlocked = false
 onready var anim = $AnimationPlayer
 
@@ -9,8 +9,8 @@ func attack():
 		anim.play("Pulse")
 
 func unlock():
-	$Sprite.scale.x = 2.35
-	$Sprite.scale.y = 2.542
+	$Sprite.scale.x = 2.405
+	$Sprite.scale.y = 2.055
 	unlocked = true
 	$Sprite.visible = true
 

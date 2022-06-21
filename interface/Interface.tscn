@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://interface/bar/life_bar/LifeBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://interface/bar/experience_bar/ExperienceBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://interface/theme/font/comfortaa_tips.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scripts/Interface.gd" type="Script" id=4]
+[ext_resource path="res://assets/weapons/sword1/sword1.png" type="Texture" id=5]
+[ext_resource path="res://assets/weapons/aura2/slice_0_0.png" type="Texture" id=7]
+[ext_resource path="res://assets/weapons/whip/0.png" type="Texture" id=8]
+[ext_resource path="res://interface/menu_box.png" type="Texture" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -16,6 +21,7 @@ signal whipUp
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = false
 	pass # Replace with function body.
 
 
@@ -60,40 +66,77 @@ margin_top = 57.0
 margin_right = 550.0
 margin_bottom = 97.0
 
-[node name="LevelupButtons" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="LevelupContent" type="Control" parent="Bars"]
+margin_top = 101.0
+margin_right = 550.0
+margin_bottom = 101.0
 script = SubResource( 1 )
 
-[node name="SwordUpButton" type="Button" parent="LevelupButtons"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -50.0
-margin_right = 200.0
-margin_bottom = 50.0
-text = "Ulepsz miecz"
+[node name="MenuBoxImage" type="TextureRect" parent="Bars/LevelupContent"]
+margin_left = 610.0
+margin_top = -3.0
+margin_right = 880.0
+margin_bottom = 509.0
+texture = ExtResource( 9 )
 
-[node name="AuraUpButton" type="Button" parent="LevelupButtons"]
+[node name="AuraUpButton" type="Button" parent="Bars/LevelupContent"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -50.0
-margin_right = 100.0
-margin_bottom = 50.0
+margin_left = 367.0
+margin_top = 253.0
+margin_right = 567.0
+margin_bottom = 353.0
+custom_fonts/font = ExtResource( 3 )
 text = "Ulepsz aure"
+align = 2
 
-[node name="WhipUpButton" type="Button" parent="LevelupButtons"]
+[node name="WhipUpButton" type="Button" parent="Bars/LevelupContent"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -50.0
-margin_bottom = 50.0
+margin_left = 92.0
+margin_top = 141.0
+margin_right = 292.0
+margin_bottom = 241.0
+custom_fonts/font = ExtResource( 3 )
 text = "Ulepsz bicz"
+align = 2
 
-[connection signal="pressed" from="LevelupButtons/SwordUpButton" to="." method="_on_SwordUpButton_pressed"]
-[connection signal="pressed" from="LevelupButtons/AuraUpButton" to="." method="_on_AuraUpButton_pressed"]
-[connection signal="pressed" from="LevelupButtons/WhipUpButton" to="." method="_on_WhipUpButton_pressed"]
+[node name="SwordUpBotton" type="Button" parent="Bars/LevelupContent"]
+margin_left = 642.0
+margin_top = 29.0
+margin_right = 842.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 3 )
+text = "Ulepsz miecz"
+align = 2
+
+[node name="SwordImage" type="TextureRect" parent="Bars/LevelupContent"]
+margin_left = 650.0
+margin_top = 45.0
+margin_right = 1290.0
+margin_bottom = 1325.0
+rect_scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 5 )
+
+[node name="WhipImage" type="TextureRect" parent="Bars/LevelupContent"]
+margin_left = 642.0
+margin_top = 157.0
+margin_right = 952.0
+margin_bottom = 417.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 8 )
+
+[node name="AuraImage" type="TextureRect" parent="Bars/LevelupContent"]
+margin_left = 650.0
+margin_top = 269.0
+margin_right = 690.0
+margin_bottom = 325.0
+texture = ExtResource( 7 )
+
+[connection signal="pressed" from="Bars/LevelupContent/AuraUpButton" to="." method="_on_AuraUpButton_pressed"]
+[connection signal="pressed" from="Bars/LevelupContent/WhipUpButton" to="." method="_on_WhipUpButton_pressed"]
+[connection signal="pressed" from="Bars/LevelupContent/SwordUpBotton" to="." method="_on_SwordUpBotton_pressed"]

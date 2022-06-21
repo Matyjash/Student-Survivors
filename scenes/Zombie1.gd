@@ -5,7 +5,7 @@ onready var animatedSprite = $AnimatedSprite
 export var health = 20
 export var damage = 10
 var type = "mob"
-var exp_to_drop = 5
+var exp_to_drop = 3
 var oldAnimation = null
 
 func _ready():
